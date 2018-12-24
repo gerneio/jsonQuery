@@ -175,7 +175,7 @@ jsonQuery.query = function(/*String*/query,/*Object?*/obj){
   // description:
   //    JSONQuery provides a comprehensive set of data querying tools including filtering,
   //    recursive search, sorting, mapping, range selection, and powerful expressions with
-  //    wildcard string . and various operators. JSONQuery generally supersets
+  //    wildcard string comparisons and various operators. JSONQuery generally supersets
   //    JSONPath and provides syntax that matches and behaves like JavaScript where
   //    possible.
   //
