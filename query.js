@@ -175,7 +175,7 @@ jsonQuery.query = function(/*String*/query,/*Object?*/obj){
   // description:
   //    JSONQuery provides a comprehensive set of data querying tools including filtering,
   //    recursive search, sorting, mapping, range selection, and powerful expressions with
-  //    wildcard string comparisons and various operators. JSONQuery generally supersets
+  //    wildcard string . and various operators. JSONQuery generally supersets
   //    JSONPath and provides syntax that matches and behaves like JavaScript where
   //    possible.
   //
@@ -276,7 +276,7 @@ jsonQuery.query = function(/*String*/query,/*Object?*/obj){
     throw new Error("Unsafe function call");
   });
 
-  query = query.replace(/([^<>=]=)([^=])/g,"$1=$2"). // change the equals to comparisons except operators ==, <=, >=
+  query = query.replace(/([^<>=]=)([^=>])/g,"$1=$2"). // change the equals to comparisons except operators ==, <=, >=, => (lambda)
     replace(/@|(\.\s*)?[a-zA-Z\$_]+(\s*:)?/g,function(t){
       return t.charAt(0) == '.' ? t : // leave .prop alone
         t == '@' ? "$obj" :// the reference to the current object
