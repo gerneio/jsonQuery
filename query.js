@@ -371,7 +371,7 @@ jsonQuery.query = function (/*String*/ query, /*Object?*/ obj) {
 
 // All objects will have access to .query() method
 // I.E. {first:1, second:2}.query("$.first")
-jsonQuery.setObjProto = () => Object.prototype.query = function(q, ...args) { return this.query(q, this, ...args); };
+jsonQuery.setObjProto = () => Object.prototype.query = function(q, ...args) { return jsonQuery.query(q, this, ...args); };
 
 // The resulting proxied object will have a direct indexer access to .query() method;
 // getter returns a recursive proxyIndexer, if applicable
