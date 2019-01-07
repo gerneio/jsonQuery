@@ -380,9 +380,9 @@ jsonQuery.proxyIndexer = (obj) => {
 	var handler = {
 		get: (o, p) => {
 			if (o[p] && (o[p].constructor.name == "Object" || o[p].constructor.name == "Array")) 
-				return this.proxyIndexer(o[p]);
+				return jsonQuery.proxyIndexer(o[p]);
 			else 
-				return p[0] == "$" ? this.query(p, o) : undefined
+				return p[0] == "$" ? jsonQuery.query(p, o) : undefined
 		}
 	}
 	
