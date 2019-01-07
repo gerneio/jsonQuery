@@ -369,13 +369,21 @@ jsonQuery.query = function (/*String*/ query, /*Object?*/ obj) {
 	return obj ? executor.apply(this, args.slice(1)) : executor;
 }
 
-// all objects will have access to .query() method I.E. {first:1, second:2}.query("$.first")
-jsonQuery.setObjProto = () => Object.prototype.query = function(q, ...args) { return jsonQuery.query(q, this, ...args); };
+// All objects will have access to .query() method
+// I.E. {first:1, second:2}.query("$.first")
+jsonQuery.setObjProto = () => Object.prototype.query = function(q, ...args) { return this.query(q, this, ...args); };
 
-// 
+// The resulting proxied object will have a direct indexer access to .query() method;
+// getter returns a recursive proxyIndexer, if applicable
+// I.E. {first:1, second:2}["$.first"]
 jsonQuery.proxyIndexer = (obj) => {
 	var handler = {
-		get: (o, p) => o[p] || p[0] == "$" ? jsonQuery.query(p, o) : undefined
+		get: (o, p) => {
+			if (o[p] && (o[p].constructor.name == "Object" || o[p].constructor.name == "Array")) 
+				return this.proxyIndexer(o[p]);
+			else 
+				return p[0] == "$" ? this.query(p, o) : undefined
+		}
 	}
 	
 	return new Proxy(obj, handler);
