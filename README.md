@@ -1,5 +1,5 @@
 # jsonQuery
-This a fork of 'jsonQuery' from https://github.com/harpreetkhalsagtbit/jsonQuery which was copied and updated for browser/node support from Dojox.json from https://github.com/maqetta/dojox/blob/master/json/query.js
+This is a fork of 'jsonQuery' from https://github.com/harpreetkhalsagtbit/jsonQuery which was copied and updated for browser/node support from Dojox.json from https://github.com/maqetta/dojox/blob/master/json/query.js
 
 ## Install
 
