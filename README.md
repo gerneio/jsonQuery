@@ -62,7 +62,7 @@ var min = pdata["$..age.min()"];
 var max = pdata["$..age.max()"];
 console.log(min, max); // 1 6
 
-// Lambda & Prototyping with LINQJS
+// Lambda & Prototyping with LINQJS: https://github.com/ENikS/LINQ
 var _EnumerableImpl = Enumerable.From([]).constructor; // LINQJS
 
 Object.setPrototypeOf(Array.prototype, _EnumerableImpl.prototype);
