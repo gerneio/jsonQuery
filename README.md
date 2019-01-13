@@ -78,18 +78,18 @@ console.log(avgAge, sumAge, ordNms); // 3.5 21 ["Steve", "Mary", "Betty"]
 
 
 # Changelog Notes
-### Commit: [ed62341](https://github.com/gerneio/jsonQuery/commit/ed6234123d4c0922603b20f132e52c1293e2ef44)
+### Commit 1/13/19: [ed62341](https://github.com/gerneio/jsonQuery/commit/ed6234123d4c0922603b20f132e52c1293e2ef44)
 
 proxyIndexer modified to return the actual handler that needs to be passed to the Proxy object. Handler is now represented in a functional/class context so it must be initialized with the new keyword before being used as the handler parameter. The object will also expose the createProxy() method to easily retrieve a proxied object on a data object. The change was made so that the user can determine how best to use the handler, whether that be in it's own proxy, or by passing it to another custom handler that combines multiple handles in a complex operation (like my use-case).
 
-var pobj = new jsonQuery.hdlrIndexer().createProxy(obj);
+```var pobj = new jsonQuery.hdlrIndexer().createProxy(obj);```
 OR
-var pobj = new Proxy(obj, new jsonQuery.hdlrIndexer());
+```var pobj = new Proxy(obj, new jsonQuery.hdlrIndexer());```
 OR
-var pobj = new Proxy(obj, new MyCustomHandler(myFirstHndl, new jsonQuery.hdlrIndexer());
+```var pobj = new Proxy(obj, new MyCustomHandler(myFirstHndl, new jsonQuery.hdlrIndexer());```
 
 
-### Commit: [28dce7e](https://github.com/gerneio/jsonQuery/commit/28dce7e90efb3d0a79c4c7ed4b9cf096352d7890)
+### Commit 1/6/19: [28dce7e](https://github.com/gerneio/jsonQuery/commit/28dce7e90efb3d0a79c4c7ed4b9cf096352d7890)
 
 Implemented a rudimentary logging system, specifically an array (queue) for the following: jsonQuery._log.func & jsonQuery._log.query. In the future need to add amt to keep or implement a tokenized session retrieval for the logs and/or add a parameter to enable console logging per jsonQuery.query() call. In the mean time the logs can be cleared on demand with jsonQuery._log.resetLogs().
 
