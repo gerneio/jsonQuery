@@ -376,18 +376,20 @@ jsonQuery.setObjProto = () => Object.prototype.query = function(q, ...args) { re
 // The resulting proxied object will have a direct indexer access to .query() method;
 // getter returns a recursive proxyIndexer, if applicable
 // I.E. {first:1, second:2}["$.first"]
-jsonQuery.proxyIndexer = (obj) => {
-	var handler = {
-		get: (o, p) => {
-			if (o[p] && (o[p].constructor.name == "Object" || o[p].constructor.name == "Array")) 
-				return jsonQuery.proxyIndexer(o[p]);
-			else 
-				return p[0] == "$" ? jsonQuery.query(p, o) : undefined
-		}
-	}
+// Create new instance of handler and then call createProxy with your object as parameter
+// I.E. new jsonQuery.hdlrIndexer().createProxy(obj)
+jsonQuery.hdlrIndexer = function() {
+	this.createProxy = (o) => new Proxy(o, this);
 	
-	return new Proxy(obj, handler);
-}
+	var isNonObj = (o) => o != undefined && [ "Object", "Array" ].indexOf(o.constructor.name) == -1;
+	
+	this.get = (o, p) => {
+		if (!isNonObj(o[p]) && o[p] != undefined) 
+			return this.createProxy(o[p]);
+		
+		return p[0] == "$" ? jsonQuery.query(p, o) : undefined;
+	};
+};
 
 
 // If this module is being used with node.js
