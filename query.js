@@ -32,7 +32,7 @@ jsonQuery._find = function e(obj, name) {
 			if (name === true && !(obj instanceof Array)) {
 				//recursive object search
 				results.push(obj);
-			} else if (obj[name]) {
+			} else if (name in obj) {
 				// found the name, add to our results
 				results.push(obj[name]);
 			}
